@@ -35,8 +35,8 @@
 	}
 	"LessOrEqual"
 	{
-		"srcVar1" "$same_team"           // if $same_team
-		"srcVar2" "$const_2"             // <= 0
+		"srcVar1" "$same_team"          // if $same_team
+		"srcVar2" "$const_2"            // <= 0
 		"resultVar" "$player_distance"  // { $player_distance =
 		"LessEqualVar" "$const_3"       // 1 }
 		"greaterVar" "$player_distance" // else { $player_distance = $player_distance }
