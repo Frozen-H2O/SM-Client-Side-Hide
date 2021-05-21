@@ -7,7 +7,7 @@ public Plugin myinfo = {
 	name = "Client Side Texture Hide",
 	author = "Ice",
 	description = "Allows for clientside texture transparency based upon vmt proxies.",
-	version = "1.1.0",
+	version = "1.1.1",
 	url = "https://github.com/Frozen-H2O/SM-Client-Side-Hide"
 };
 
@@ -18,12 +18,12 @@ ConVar g_hidedist_cvar;
 ConVar g_hideScale;
 
 public void OnPluginStart() {
-	RegConsoleCmd("sm_hide", Command_Hide, "sm_hide <value> - Sets the distance to hide textures at. Leave value blank to toggle hide on/off");
+	RegConsoleCmd("sm_hide", Command_Hide, "sm_hide <value> - Sets the approximate distance to fully hide textures at (begin fade in). Leave value blank to toggle hide on/off");
 	g_hidemode_cvar = CreateConVar("sm_CS_hide_mode_cvar", "bot_dont_shoot", "Which cvar to fake to clients for hide mode. Should mirror the vmt's convar proxy for $hide");
 	g_hidemode = RegClientCookie("sm_CS_hide_mode_cookie", "Mode for client side hiding. (0 off, non-0 on)", CookieAccess_Protected);
 	g_hidedist_cvar = CreateConVar("sm_CS_hide_dist_cvar", "bot_difficulty", "Which cvar to fake to clients for hide distance. Should mirror the vmt's convar proxy for $hide_dist");
-	g_hidedist = RegClientCookie("sm_CS_hide_dist_cookie", "Distance in units to hide models.", CookieAccess_Protected);
-	g_hideScale = CreateConVar("sm_CS_hide_scale", "0.007", "Scale at which textures are fully faded in/out (not when fade begins). Should mirror the vmt's PlayerProximity proxy's scale value");
+	g_hidedist = RegClientCookie("sm_CS_hide_dist_cookie", "Distance in units * Scale to hide textures (when textures are fully invis/begin to fade in).", CookieAccess_Protected);
+	g_hideScale = CreateConVar("sm_CS_hide_scale", "0.007", "Scale at which textures fade out. Should mirror the vmt's PlayerProximity proxy's scale value");
 }
 
 public void OnClientCookiesCached(int client) {
