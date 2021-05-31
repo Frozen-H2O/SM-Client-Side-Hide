@@ -1,21 +1,14 @@
-"$alpha" 1.0
+"$alpha" "1.0"
 "$player_distance" "0.0"
 "$hide_dist" "0.0"
 "$same_team" "0"
-"$const_1" "0"
-"$const_2" "0.5"
-"$const_3" "1"
-"$hide" "1"
+"$const_1" "0.5"
+"$const_2" "1"
 "Proxies"
 {
 	"ConVar"
 	{
-		"convar" "bot_dont_shoot" //1 is on (all players hidden), 0 is off (players show semi-transparent). Should be default 0
-		"resultVar" "$hide"
-	}
-	"ConVar"
-	{
-		"convar" "bot_difficulty" //for distance scaling
+		"convar" "bot_difficulty" //for transparency distance
 		"resultVar" "$hide_dist"
 	}
 	"PlayerTeamMatch"
@@ -36,19 +29,10 @@
 	"LessOrEqual"
 	{
 		"srcVar1" "$same_team"          // if $same_team
-		"srcVar2" "$const_2"            // <= 0
+		"srcVar2" "$const_1"            // <= 0.5
 		"resultVar" "$player_distance"  // { $player_distance =
-		"LessEqualVar" "$const_3"       // 1 }
+		"LessEqualVar" "$const_2"       // 1 }
 		"greaterVar" "$player_distance" // else { $player_distance = $player_distance }
-	}
-	//Check for hide mode disabled (0) or enabled (>0.5)
-	"LessOrEqual"
-	{
-		"srcVar1" "$hide"               // if $hide
-		"srcVar2" "$const_2"            // <= 0.5
-		"resultVar" "$player_distance"  // { $player_distance =
-		"LessEqualVar" "$const_3"       // 1 }
-		"greaterVar" "$player_distance" // else { $player_distance = player_distance }
 	}
 	"Clamp"
 	{
